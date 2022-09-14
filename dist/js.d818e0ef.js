@@ -252,7 +252,7 @@ var createParagraph = function createParagraph(text) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getDeaths = exports.getEpisodes = exports.getQuotes = exports.getCharacters = void 0;
+exports.getCharacterById = exports.getDeaths = exports.getEpisodes = exports.getQuotes = exports.getCharacters = void 0;
 // const getData = () => {
 //   fetch('https://www.breakingbadapi.com/api')
 //     .then((response) => response.json())
@@ -263,12 +263,12 @@ exports.getDeaths = exports.getEpisodes = exports.getQuotes = exports.getCharact
 // //   getQuotes(data);
 // });
 // };
-var data = "https://breakingbadapi.com/api/";
+var data = 'https://breakingbadapi.com/api/';
 
 var getCharacters = function getCharacters() {
   return fetch(data + 'characters').then(function (response) {
     return response.json();
-  });
+  }); // .then((response) => console.log('response', response)))
 };
 
 exports.getCharacters = getCharacters;
@@ -296,6 +296,14 @@ var getQuotes = function getQuotes(data) {
 };
 
 exports.getQuotes = getQuotes;
+
+var getCharacterById = function getCharacterById(id) {
+  return fetch(data + 'characters/' + id).then(function (response) {
+    return response.json();
+  });
+};
+
+exports.getCharacterById = getCharacterById;
 },{}],"src/js/index.js":[function(require,module,exports) {
 "use strict";
 
@@ -315,17 +323,32 @@ function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o =
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
+var characterId = '';
 Api.getCharacters().then(function (dataCharacters) {
   var characterArray = [];
+  var characterDetails = [];
 
   var _iterator = _createForOfIteratorHelper(dataCharacters),
       _step;
 
   try {
-    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+    var _loop = function _loop() {
       var character = _step.value;
       var item = Utils.createCharacterRow(character);
+      characterDetails.push(character);
+
+      item.onclick = function () {
+        characterId = character.char_id;
+        Api.getCharacterById(characterId).then(function (characterDetails) {
+          Utils.showCharacter(characterDetails[0]);
+        });
+      };
+
       characterArray.push(item);
+    };
+
+    for (_iterator.s(); !(_step = _iterator.n()).done;) {
+      _loop();
     }
   } catch (err) {
     _iterator.e(err);
@@ -333,11 +356,9 @@ Api.getCharacters().then(function (dataCharacters) {
     _iterator.f();
   }
 
-  ;
-
   for (var _i = 0, _characterArray = characterArray; _i < _characterArray.length; _i++) {
     var list = _characterArray[_i];
-    document.getElementById("root").append(list);
+    document.getElementById('root').append(list);
   }
 });
 },{"../css/styles.css":"src/css/styles.css","./utils":"src/js/utils.js","./data-business":"src/js/data-business.js"}],"../../../../../../../usr/local/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
@@ -368,7 +389,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62690" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65080" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
