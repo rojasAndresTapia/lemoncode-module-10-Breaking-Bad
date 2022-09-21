@@ -253,16 +253,6 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.getCharacterById = exports.getDeaths = exports.getEpisodes = exports.getQuotes = exports.getCharacters = void 0;
-// const getData = () => {
-//   fetch('https://www.breakingbadapi.com/api')
-//     .then((response) => response.json())
-// .then((data) => {
-//   return getCharacters(data);
-// //   getDeaths(data);
-// //   getEpisodes(data);
-// //   getQuotes(data);
-// });
-// };
 var data = 'https://breakingbadapi.com/api/';
 
 var getCharacters = function getCharacters() {
@@ -389,7 +379,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "65080" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "64237" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -1,13 +1,4 @@
-// const getData = () => {
-//   fetch('https://www.breakingbadapi.com/api')
-//     .then((response) => response.json())
-// .then((data) => {
-//   return getCharacters(data);
-// //   getDeaths(data);
-// //   getEpisodes(data);
-// //   getQuotes(data);
-// });
-// };
+
 const data = 'https://breakingbadapi.com/api/';
 
 const getCharacters = () => {
